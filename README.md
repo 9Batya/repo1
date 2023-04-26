@@ -24,7 +24,7 @@
 
 Для локальной работы с репозиторием его нужно клонировать.
 Для этого используется команда git clone:
-
+## ух бля
 ```
 $ git clone git@github.com:natenka/pyneng-examples-exercises.git
 Cloning into 'pyneng-examples-exercises'...
