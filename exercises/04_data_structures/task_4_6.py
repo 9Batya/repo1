@@ -28,3 +28,13 @@ Next-Hop              {}
 Last update           {}
 Outbound Interface    {}
 """
+a = ospf_route.replace(',','').split() #strip удаляет только крайние значения, поэтому replace для удаления запятых
+a.remove('via') #via лишний
+ip_template ='''
+{:<25} {:<20}
+{:<25} {:<20}
+{:<25} {:<20}
+{:<25} {:<20}
+{:<25} {:<20}'''
+pref,ad,nh,lu,oi=a
+print (template.format(pref,ad,nh,lu,oi))
