@@ -37,4 +37,5 @@ ip_template ='''
 {:<25} {:<20}
 {:<25} {:<20}'''
 pref,ad,nh,lu,oi=a
+ad.strip('[]')
 print (template.format(pref,ad,nh,lu,oi))
