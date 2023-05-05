@@ -16,6 +16,6 @@
 """
 
 mac = "AAAA:BBBB:CCCC"
-mac_template='''{:b}{:b}{:b}'''
+mac_template='''{:b}{:b}{:b}''' #перевод в бинарную систему
 a,b,c=(mac.split(':'))
-print(mac_template.format(int(a,16),int(b,16),int(c,16)))
+print(mac_template.format(int(a,16),int(b,16),int(c,16))) #перевод в число, затем через форматирование обратно в строку
