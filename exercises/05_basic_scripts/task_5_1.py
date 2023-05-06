@@ -20,7 +20,8 @@ $ python task_5_1.py
 Все задания надо выполнять используя только пройденные темы. То есть эту задачу можно
 решить без использования условия if.
 """
-
+#!/usr/bin/env python3
+device=str(input('enter device name: '))
 london_co = {
     "r1": {
         "location": "21 New Globe Walk",
@@ -46,3 +47,5 @@ london_co = {
         "routing": True,
     },
 }
+print ('/n'+'-'*30)
+print(london_co[device])
