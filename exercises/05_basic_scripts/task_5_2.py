@@ -51,5 +51,5 @@ mask_template = '''
 '''
 print('Network:')
 print(ip_template.format(int(a),int(b),int(c),int(d)))
-print('Mask:'+'\n'+str(e).strip("'[]'"))
+print('Mask:'+'\n'+'/'+str(e).strip("'[]'"))
 print(mask_template.format(int(fa,2),int(fb,2),int(fc,2),int(fd,2)))
