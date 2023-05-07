@@ -19,6 +19,9 @@ $ python task_5_1a.py
 решить без использования условия if.
 """
 
+#!/usr/bin/env python3
+device=str(input('enter device name: '))
+item=str(input('enter item name: '))
 london_co = {
     "r1": {
         "location": "21 New Globe Walk",
@@ -44,3 +47,8 @@ london_co = {
         "routing": True,
     },
 }
+print ('\n'+'-'*30)
+print(london_co[device])
+print ('\n'+'-'*30)
+print(london_co[device][item])
+
