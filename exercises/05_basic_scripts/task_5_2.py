@@ -49,7 +49,7 @@ mask_template = '''
 {0:<8}  {1:<8}  {2:<8}  {3:<8}
 {0:08b}  {1:08b}  {2:08b}  {3:08b}  
 '''
-print('Network')
+print('Network:')
 print(ip_template.format(int(a),int(b),int(c),int(d)))
-print('Mask'+'\n'+str(e).strip("'[]'")+'\n')
+print('Mask:'+'\n'+str(e).strip("'[]'"))
 print(mask_template.format(int(fa,2),int(fb,2),int(fc,2),int(fd,2)))
