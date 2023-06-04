@@ -50,16 +50,19 @@ switchport mode trunk
 switchport trunk allowed vlan 2,3,4,5
 """
 
+c= input('input mode: ')
+d=input('input vlan (vlans): ')
 access_template = [
-    "switchport mode access",
-    "switchport access vlan {}",
-    "switchport nonegotiate",
-    "spanning-tree portfast",
-    "spanning-tree bpduguard enable",
+    "switchport mode access", "switchport access vlan {}",
+    "switchport nonegotiate", "spanning-tree portfast",
+    "spanning-tree bpduguard enable"
 ]
-
 trunk_template = [
-    "switchport trunk encapsulation dot1q",
-    "switchport mode trunk",
-    "switchport trunk allowed vlan {}",
+    "switchport trunk encapsulation dot1q", "switchport mode trunk",
+    "switchport trunk allowed vlan {}"
 ]
+a='\n'.join(access_template)
+b='\n'.join(trunk_template)
+
+f={'access':a,'trunk':b}
+print((f[c]).format(d))
