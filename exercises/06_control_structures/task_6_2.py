@@ -14,20 +14,23 @@
 """
 ip = input ('Введите ип: ')
 ip = ip.split('.')
-if int(ip[1])<=224 and int(ip[1]) != 0:
-    print ('unicat')
-elif int(ip[1]) <= 239 and int(ip[1]) != 0:
-    print ('multicast')
-else:
-    for i in ip:
-        if int(i) !=255:
-            break
-        else:
-            print ('broadcast')
-        if int(i) !=0:
-            break
-        else:
-            print ('unassigned')
+for i in ip:
+    if int(ip[0]) <= 224 and int(ip[1]) != 0:
+        print('unicat')
         break
+    if int(ip[0]) <= 239 and int(ip[1]) != 0:
+        print('multicast')
+        break
+    if int(i) !=255:
+        pass
     else:
-        print ('unused')
+        print ('broadcast')
+        break
+    if int(i) !=0:
+        pass
+    else:
+        print('unassigned')
+        break
+    if 239 < int(ip[0]) < 255:
+        print ('unassigned')
+        break
