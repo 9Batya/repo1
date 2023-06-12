@@ -24,7 +24,7 @@ for i in ip:
     if int(i) !=255:
         pass
     else:
-        print ('broadcast')
+        print ('local broadcast')
         break
     if int(i) !=0:
         pass
@@ -32,5 +32,5 @@ for i in ip:
         print('unassigned')
         break
     if 239 < int(ip[0]) < 255:
-        print ('unassigned')
+        print ('unused')
         break
