@@ -13,7 +13,7 @@ MAC-адреса используются в формате XXXX.XXXX.XXXX
 """
 
 mac = ["aabb:cc80:7000", "aabb:dd80:7340", "aabb:ee80:7000", "aabb:ff80:7000"]
-maccisco = []
+result = []
 for i in mac:
-    maccisco.append('.'.join(i.split(':')))
-print (maccisco)
+    result.append('.'.join(i.split(':')))
+print (result)
