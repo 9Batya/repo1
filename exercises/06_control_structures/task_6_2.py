@@ -12,3 +12,22 @@
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
+ip = input ('Введите ип: ')
+ip = ip.split('.')
+if int(ip[1])<=224 and int(ip[1]) != 0:
+    print ('unicat')
+elif int(ip[1]) <= 239 and int(ip[1]) != 0:
+    print ('multicast')
+else:
+    for i in ip:
+        if int(i) !=255:
+            break
+        else:
+            print ('broadcast')
+        if int(i) !=0:
+            break
+        else:
+            print ('unassigned')
+        break
+    else:
+        print ('unused')
