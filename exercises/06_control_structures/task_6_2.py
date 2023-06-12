@@ -16,7 +16,7 @@ ip = input ('Введите ип: ')
 ip = ip.split('.')
 for i in ip:
     if int(ip[0]) <= 224 and int(ip[1]) != 0:
-        print('unicat')
+        print('unicast')
         break
     if int(ip[0]) <= 239 and int(ip[1]) != 0:
         print('multicast')
