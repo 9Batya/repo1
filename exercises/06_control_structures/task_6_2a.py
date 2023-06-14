@@ -21,9 +21,12 @@ ip = input('Введите ип: ')
 ip = ip.split('.')
 while True:
     if any( i.isdigit() == False for i in ip ):
-        print( 'без букв' )
+        print( 'Неправильный IP-адрес' )
+    elif len(ip)!=4:
+        print('Неправильный IP-адрес')
+    elif any(int(i)>255 or int(i)<0 for i in ip):
+        print ('Неправильный IP-адрес')
     else:
-        print('все четко')
         break
     ip = input('Введите ип: ')
     ip = ip.split( '.' )
