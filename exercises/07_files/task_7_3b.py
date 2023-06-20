@@ -17,3 +17,19 @@ Enter VLAN number: 10
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+enter = input('Введите номер vlan: ')
+result = {}
+with open('CAM_table.txt') as f:
+    for line in f:
+        if 'Gi' in line:
+            interface = line.split()[3]
+            mac = line.split()[1]
+            vlan = int(line.split()[0])
+            result[vlan] = [interface, mac]
+a = sorted(result)
+put = enter.split(',')
+for i in a:
+    if any(int(g) == i for g in put):
+        print("{:<5} {:>10} {:>20}".format(i, result[i][0], result[i][1]))
+    else:
+        pass
