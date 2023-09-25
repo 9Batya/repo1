@@ -49,6 +49,7 @@ ignore = ["duplex", "alias", "configuration"]
 
 
 ignore = ["duplex", "alias", "Current configuration"]
+ignore = ["duplex", "alias", "Current configuration"]
 def ignore_command(command, ignore):
     ignore_status = False
     for word in ignore:
@@ -61,8 +62,9 @@ def convert_config_to_dict (config_filename):
         interface = None
         for line in f:
             l1 = []
-            if '!' in line:
-                pass
+            if (line.split(' ')[0]).startswith('!') or (line.split(' ')[0]).startswith('\n'):
+                interface = None
+                continue
             if ignore_command(line,ignore) == True:
                 pass
             elif 'interface' in line:
