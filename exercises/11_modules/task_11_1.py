@@ -41,7 +41,6 @@ def parse_cdp_neighbors(command_output):
         lhostint=[]
         ldevint=[]
         host=[]
-        l=[]
         for line in f:
             line_list=line.split()
             if 'Eth' in line:
