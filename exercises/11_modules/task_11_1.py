@@ -37,14 +37,20 @@ R6           Fa 0/2          143           R S I           2811       Fa 0/0
 
 def parse_cdp_neighbors(command_output):
     with open(command_output) as f:
-        l1=[]
-        l2=[]
+        ldev=[]
+        lhostint=[]
+        ldevint=[]
+        host=[]
+        l=[]
         for line in f:
             line_list=line.split()
             if 'Eth' in line:
-                l1.append(line_list[0])
-                l2.append(line_list[1]+line_list[2])
-    return (list(zip(l1,l2)))
+                ldev.append(line_list[0])
+                lhostint.append(line_list[1]+line_list[2])
+                ldevint.append(line_list[-2]+line_list[-1])
+            elif '>' in line:
+                host=[line.split('>')[0]]
+
+    return (dict(zip(list(zip(host*len(ldevint),lhostint)),list(zip(ldev,lhostint)))))
 if __name__ == "__main__":
-    print(parse_cdp_neighbors("sh_cdp_n_sw1.txt"))
-        print(parse_cdp_neighbors(f.read()))
+    print(parse_cdp_neighbors("sh_cdp_n_r3.txt"))
