@@ -80,3 +80,28 @@ infiles = [
     "sh_cdp_n_r2.txt",
     "sh_cdp_n_r3.txt",
 ]
+from draw_network_graph import draw_topology
+from parse_cdp_neighbors import parse_cdp_neighbors
+def create_network_map(txt):
+    topology={}
+    for i in txt:
+        topology.update(parse_cdp_neighbors(i))
+    keys = list(topology.keys())
+    values = list(topology.values())
+    for k in keys:
+        if k in values:
+            keys.remove(topology[k])
+            del topology[k]
+
+    return topology
+
+
+if __name__=="__main__":
+    infiles  = [
+    "sh_cdp_n_sw1.txt",
+    "sh_cdp_n_r1.txt",
+    "sh_cdp_n_r2.txt",
+    "sh_cdp_n_r3.txt",
+]
+print(create_network_map(infiles))
+draw_topology(create_network_map(infiles))
