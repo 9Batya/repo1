@@ -34,3 +34,30 @@
  '172.21.41.129', '172.21.41.130', '172.21.41.131', '172.21.41.132']
 
 """
+import ipaddress
+iplist = ['8.8.4.4', '1.1.1.1-3', '172.21.41.128-172.21.41.132']
+result = []
+result2 = []
+for ip in iplist:
+    if "-" in ip:
+        start_ip,end_ip=ip.split("-")
+        start_ip=ipaddress.ip_address(start_ip)
+        if len(end_ip.split('.'))!=4:
+            end_ip=start_ip+int(end_ip)-1
+        else:
+            end_ip=ipaddress.ip_address(end_ip)
+        result.extend(ip for ip in ipaddress.summarize_address_range(start_ip, end_ip))
+        print(result)
+    else:
+        result.append(ipaddress.ip_address(ip))
+        print(result)
+print(result)
+for i in result:
+    if type(i) == ipaddress.IPv4Address:
+        result2.append(str(i))
+    else:
+        for ip in list(i):
+            result2.append(str(ip))
+print(result2)
+
+
