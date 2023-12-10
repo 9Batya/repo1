@@ -24,3 +24,31 @@
 а не ввод пользователя.
 
 """
+import re
+from pprint import pprint
+
+
+def parse_cdp(filename):
+    regex = (r'interface (?P<int>\S+)'
+             r'|ip address (?P<ip1>[\d.]+) (?P<ip2>[\d.]+)')
+
+    result = {}
+
+    with open(filename) as f:
+        match_iter = re.finditer(regex, f.read())
+        for match in match_iter:
+            if match.lastgroup == 'int':
+                device = match.group(match.lastgroup)
+                result[device] = {}
+            elif device:
+                result[device] = match.group(2,3)
+
+    list = []
+    for key in result:
+        if result[key] == {}:
+            list.append(key)
+    for key in list:
+        del result[key]
+
+    return result
+pprint(parse_cdp('config_r1.txt'))
