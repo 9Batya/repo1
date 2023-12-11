@@ -21,3 +21,20 @@
 Проверить работу функции на примере файла sh_ip_int_br.txt.
 
 """
+import re
+from pprint import pprint
+def parse_cdp(filename):
+    regex = (r'(\S+) +'
+             r'([\d.]+) +'
+             r'\w+ +\w+ +'
+             r'(up|down|administratively down) +'
+             r'(up|down)')
+
+    result = []
+
+    with open(filename) as f:
+        match_iter = re.finditer(regex, f.read())
+        for match in match_iter:
+            result.append(match.groups())
+    return result
+pprint(parse_cdp('sh_ip_int_br.txt'))
