@@ -28,3 +28,33 @@ IP-адреса, диапазоны адресов и так далее, так 
 а не ввод пользователя.
 
 """
+import re
+from pprint import pprint
+
+
+def parse_cdp(filename):
+    regex = (r'interface (?P<int>\S+)'
+             r'|ip address (?P<ip1>[\d.]+) (?P<ip2>[\d.]+)')
+
+    result = {}
+
+    with open(filename) as f:
+        match_iter = re.finditer(regex, f.read())
+        for match in match_iter:
+            if match.lastgroup == 'int':
+                device = match.group(match.lastgroup)
+                result[device] = {}
+                list1 = []
+            else:
+                list1.append(match.group(2, 3))
+                result[device] = list1
+
+    list2 = []
+    for key in result:
+        if result[key] == {}:
+            list2.append(key)
+    for key in list2:
+        del result[key]
+
+    return result
+pprint(parse_cdp('config_r2.txt'))
