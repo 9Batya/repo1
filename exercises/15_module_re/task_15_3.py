@@ -32,3 +32,22 @@ object network LOCAL_10.1.9.5
 
 Во всех правилах для ASA интерфейсы будут одинаковыми (inside,outside).
 """
+import re
+from pprint import pprint
+def parse_cdp(filename1, filename2):
+ regex = (r'ip nat inside source static tcp (?P<ip>[\d.]+) +'
+          r'?P<sport>\d+) +'
+          r'interface GigabitEthernet0/1 (?P<dport>\d+)')
+ result = {}
+ config = []
+ with open(filename1) as f:
+  match_iter = re.finditer(regex, f.read())
+  for match in match_iter:
+   config.append(match.groupdict())
+   result['config'] = config
+ with open(filename2, 'w') as f:
+  for i in result['config']:
+   f.write(f'''object network LOCAL_{i['ip']}
+host 10.1.2.84
+nat (inside,outside) static int service tcp {i['sport']} {i['dport']}\n''')
+   return
