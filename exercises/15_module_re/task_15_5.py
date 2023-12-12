@@ -26,3 +26,22 @@ description Connected to SW1 port Eth 0/1
 
 Проверить работу функции на файле sh_cdp_n_sw1.txt.
 """
+import re
+from pprint import pprint
+def parse_cdp(filename1):
+    regex = (r'\S+ +(\S+ \d/\d) +\d+ + R S I +\d+ +(\S+ \d/\d)')
+    portown = []
+    portcdp = []
+    with open(filename1) as f:
+        match_all = re.findall(regex, f.read())
+        for port1, port2 in match_all:
+            portown.append(port1)
+            portcdp.append(f'description Connected to SW1 port {port2}')
+    result = dict(zip(portown,portcdp))
+
+
+    return result
+
+
+
+pprint(parse_cdp('sh_cdp_n_sw1.txt'))
