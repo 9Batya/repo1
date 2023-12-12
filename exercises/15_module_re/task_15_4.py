@@ -24,3 +24,22 @@ interface Loopback0
 
 Проверить работу функции на примере файла config_r1.txt.
 """
+import re
+from pprint import pprint
+def parse_cdp(filename1):
+    regex = (r'interface (\S+/\S+)')
+    regex2 = (r'interface (\S+/\S+)\n desc')
+
+
+    with open(filename1) as f:
+        match_all = re.findall(regex, f.read())
+    with open(filename1) as f:
+        match_description = re.findall(regex2, f.read())
+    for i in match_all:
+        if i in match_description:
+            match_all.remove(i)
+    return match_all
+
+
+
+pprint(parse_cdp('config_r1.txt'))
