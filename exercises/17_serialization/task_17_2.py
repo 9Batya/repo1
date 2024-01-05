@@ -43,9 +43,38 @@
 Кроме того, создан список заголовков (headers), который должен быть записан в CSV.
 """
 
+import csv
+import re
 import glob
 
 sh_version_files = glob.glob("sh_vers*")
-# print(sh_version_files)
 
-headers = ["hostname", "ios", "image", "uptime"]
+def parse_sh_version(file_names):
+    regex = (r'IOS Software.+Version\s+(?P<ios>\S+),'
+             r'|image file is "(?P<image>\S+)"'
+             r'|router uptime is (?P<uptime>\d+\s+\S+\s+\d+\s+\S+\s+\d+\s+\S+)')
+    regex2 = r'(?P<hostname>r\d+)'
+    data = []
+    for i in file_names:
+        match = re.search(regex2, i)
+        result = match.groupdict()
+        with open(i) as f:
+            for line in f:
+                match_iter = re.finditer(regex, line)
+                for match in match_iter:
+                    result.update({match.lastgroup:match.group(match.lastgroup)})
+        data.append(result)
+    return data
+def write_inventory_to_csv(data_filenames,csv_filename):
+    parsing = parse_sh_version(data_filenames)
+    with open(csv_filename, 'w') as f:
+        writer = csv.DictWriter(
+            f, fieldnames=list(parsing[0].keys()), quoting=csv.QUOTE_NONNUMERIC)
+        writer.writeheader()
+        for d in parsing:
+            writer.writerow(d)
+    with open(csv_filename, 'r') as f:
+        data = f.read()
+    return data
+
+print(write_inventory_to_csv(sh_version_files,"sh_verion.csv"))
