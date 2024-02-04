@@ -34,14 +34,11 @@ Out[3]:
 """
 
 class Topology:
-    def __init__(self,topology_example):
-        keys = list(topology_example.keys())
-        values = list(topology_example.values())
-        for k in keys:
-            if k in values:
-                keys.remove(topology_example[k])
-                del topology_example[k]
-        self.topology = topology_example
+    def __init__(self,topology_dict):
+        self.topology = {}
+        for local, remote in topology_dict.items():
+            if not self.topology.get(remote) == local:
+                self.topology[local] = remote
 
 topology_example = {('R1', 'Eth0/0'): ('SW1', 'Eth0/1'),
                     ('R2', 'Eth0/0'): ('SW1', 'Eth0/2'),
