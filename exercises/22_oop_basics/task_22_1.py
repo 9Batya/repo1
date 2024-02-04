@@ -53,5 +53,8 @@ topology_example = {('R1', 'Eth0/0'): ('SW1', 'Eth0/1'),
                     ('SW1', 'Eth0/2'): ('R2', 'Eth0/0'),
                     ('SW1', 'Eth0/3'): ('R3', 'Eth0/0')}
 
-T = Topology(topology_example)
-print(T.topology)
+
+if __name__ == "__main__":
+    T = Topology(topology_example)
+    print(T.topology)
+
