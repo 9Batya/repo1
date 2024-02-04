@@ -22,12 +22,12 @@ class Topology:
 
     def delete_node(self, *args):
         list_to_delete = []
-        for local, remote in self.topology.items():
-            for device in args:
+        for device in args:
+            for local, remote in self.topology.items():
                 if device in local:
                     list_to_delete.append(local)
-                elif device in remote:
-                    list_to_delete.append(remote)
+                elif device in remote and local not in list_to_delete:
+                    list_to_delete.append(local)
         if list_to_delete == []:
             print('Такого устройства нет')
         for key in list_to_delete:
@@ -47,5 +47,5 @@ topology_example = {('R1', 'Eth0/0'): ('SW1', 'Eth0/1'),
 
 if __name__ == "__main__":
     T = Topology(topology_example)
-    T.delete_node('R1')
+    T.delete_node('SW1')
     pprint(T.topology)
