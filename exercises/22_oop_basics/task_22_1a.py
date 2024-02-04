@@ -1,12 +1,12 @@
+from pprint import pprint
 class Topology:
     def __init__(self, topology_dict):
         self.topology = self._normalize(topology_dict)
-    def _normalize(self, topology):
-        normalize = {}
-        for local, remote in topology.items():
-            if not normalize.get(remote) == local:
-                normalize[local] = remote
-        return normalize
+    def _normalize(self, topology_dict):
+        return {
+            min(local, remote): max(local, remote)
+            for local, remote in topology_dict.items()
+        }
 
 
 topology_example = {('R1', 'Eth0/0'): ('SW1', 'Eth0/1'),
@@ -22,4 +22,4 @@ topology_example = {('R1', 'Eth0/0'): ('SW1', 'Eth0/1'),
 
 if __name__ == "__main__":
     T = Topology(topology_example)
-    print(T.topology)
+    pprint(T.topology)
