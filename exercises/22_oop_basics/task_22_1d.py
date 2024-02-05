@@ -28,7 +28,6 @@ class Topology:
 
     def add_link(self, *ports, existing_port = False):
         link1 = (ports[0], ports[1])
-        link2 = (ports[1], ports[0])
         for item in self.topology.items():
             if (ports[0] or ports[1]) in item:
                 existing_port = True
